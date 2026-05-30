@@ -3,6 +3,7 @@ export type ProductStatus = 'active' | 'inactive';
 export interface Product {
   id: string;
   name: string;
+  imageUrl: string;
   category: string;
   price: number;
   status: ProductStatus;

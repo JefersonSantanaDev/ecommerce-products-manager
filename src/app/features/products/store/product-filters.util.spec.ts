@@ -5,6 +5,7 @@ const mockProducts: Product[] = [
   {
     id: 'p1',
     name: 'Teclado Mecanico',
+    imageUrl: 'https://picsum.photos/seed/filter-teclado/800/600',
     category: 'Perifericos',
     price: 399.9,
     status: 'active',
@@ -15,6 +16,7 @@ const mockProducts: Product[] = [
   {
     id: 'p2',
     name: 'Mouse Gamer',
+    imageUrl: 'https://picsum.photos/seed/filter-mouse/800/600',
     category: 'Perifericos',
     price: 249.9,
     status: 'inactive',
@@ -25,6 +27,7 @@ const mockProducts: Product[] = [
   {
     id: 'p3',
     name: 'Monitor IPS 27',
+    imageUrl: 'https://picsum.photos/seed/filter-monitor/800/600',
     category: 'Monitores',
     price: 1299.0,
     status: 'active',

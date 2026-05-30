@@ -13,6 +13,7 @@ const baseProducts: Product[] = [
   {
     id: 'p1',
     name: 'Teclado Mecanico',
+    imageUrl: 'https://picsum.photos/seed/spec-teclado/800/600',
     category: 'Perifericos',
     price: 399.9,
     status: 'active',
@@ -23,6 +24,7 @@ const baseProducts: Product[] = [
   {
     id: 'p2',
     name: 'Monitor 27',
+    imageUrl: 'https://picsum.photos/seed/spec-monitor/800/600',
     category: 'Monitores',
     price: 1299,
     status: 'inactive',
@@ -69,6 +71,7 @@ describe('ProductsStore', () => {
   it('adiciona produto com create', async () => {
     const payload: CreateProductPayload = {
       name: 'Mouse',
+      imageUrl: 'https://picsum.photos/seed/spec-mouse/800/600',
       category: 'Perifericos',
       price: 199.9,
       status: 'active',
@@ -93,6 +96,7 @@ describe('ProductsStore', () => {
     const payload: UpdateProductPayload = {
       id: 'p1',
       name: 'Teclado Mecanico Pro',
+      imageUrl: 'https://picsum.photos/seed/spec-teclado-pro/800/600',
       category: 'Perifericos',
       price: 499.9,
       status: 'active',
@@ -129,6 +133,7 @@ describe('ProductsStore', () => {
   it('define erro quando create falha', async () => {
     const payload: CreateProductPayload = {
       name: 'Falha',
+      imageUrl: 'https://picsum.photos/seed/spec-falha/800/600',
       category: 'Teste',
       price: 10,
       status: 'inactive',

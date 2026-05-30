@@ -20,6 +20,17 @@
       </label>
 
       <label>
+        URL da imagem
+        <input type="url" formControlName="imageUrl" placeholder="https://exemplo.com/produto.jpg" />
+        @if (controls.imageUrl.touched && controls.imageUrl.hasError('required')) {
+          <small>URL da imagem e obrigatoria.</small>
+        }
+        @if (controls.imageUrl.touched && controls.imageUrl.hasError('pattern')) {
+          <small>Informe uma URL valida com http:// ou https://.</small>
+        }
+      </label>
+
+      <label>
         Categoria
         <input type="text" formControlName="category" />
         @if (controls.category.touched && controls.category.hasError('required')) {
@@ -38,13 +49,16 @@
         }
       </label>
 
-      <label>
-        Status
-        <select formControlName="status">
-          <option value="active">Ativo</option>
-          <option value="inactive">Inativo</option>
-        </select>
-      </label>
+      <div class="product-form__field">
+        <span class="product-form__field-label">Status</span>
+        <app-custom-select
+          label="Status do produto"
+          placeholder="Selecione o status"
+          [options]="statusOptions"
+          [value]="controls.status.value"
+          (valueChange)="onStatusChange($event)"
+        />
+      </div>
 
       <label>
         Estoque

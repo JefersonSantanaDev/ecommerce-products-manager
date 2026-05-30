@@ -14,6 +14,7 @@ import { ProductsStore } from '../../store';
 })
 export class ProductListPageComponent implements OnInit {
   readonly productsStore = inject(ProductsStore);
+  readonly fallbackImageSrc = '/assets/products/monitor.jpg';
 
   ngOnInit(): void {
     this.productsStore.loadAll();
@@ -38,5 +39,19 @@ export class ProductListPageComponent implements OnInit {
 
   onClearNotice(): void {
     this.productsStore.clearNotice();
+  }
+
+  onProductImageError(event: Event): void {
+    const target = event.target;
+    if (!(target instanceof HTMLImageElement)) {
+      return;
+    }
+
+    if (target.dataset['fallbackApplied'] === 'true') {
+      return;
+    }
+
+    target.dataset['fallbackApplied'] = 'true';
+    target.src = this.fallbackImageSrc;
   }
 }

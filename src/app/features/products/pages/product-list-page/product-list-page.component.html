@@ -31,8 +31,7 @@
       <ul>
         @for (item of productsStore.filteredItems(); track item.id) {
           <li>
-            <div class="products-page__item-header">
-              <strong>{{ item.name }}</strong>
+            <div class="products-page__meta">
               <span
                 class="products-page__status"
                 [class.products-page__status--active]="item.status === 'active'"
@@ -42,22 +41,74 @@
               </span>
             </div>
 
-            <p>Categoria: {{ item.category }}</p>
-            <p>Preco: R$ {{ item.price }}</p>
-            <p>Estoque: {{ item.stock }}</p>
+            <div class="products-page__item-media">
+              <img
+                [src]="item.imageUrl"
+                [alt]="'Imagem do produto ' + item.name"
+                loading="lazy"
+                decoding="async"
+                (error)="onProductImageError($event)"
+              />
+            </div>
 
-            <div class="products-page__actions">
-              <a class="products-page__action-link" [routerLink]="['/products', item.id, 'edit']">
-                Editar
-              </a>
-              <button
-                class="products-page__delete-btn"
-                type="button"
-                [disabled]="productsStore.deletingId() === item.id"
-                (click)="onDelete(item.id)"
-              >
-                {{ productsStore.deletingId() === item.id ? 'Excluindo...' : 'Excluir' }}
-              </button>
+            <div class="products-page__item-content">
+              <div class="products-page__item-header">
+                <strong>{{ item.name }}</strong>
+              </div>
+
+              <div class="products-page__specs">
+                <p class="products-page__spec">
+                  <span class="products-page__spec-label">Categoria</span>
+                  <strong class="products-page__spec-value">{{ item.category }}</strong>
+                </p>
+                <p class="products-page__spec">
+                  <span class="products-page__spec-label">Preco</span>
+                  <strong class="products-page__spec-value">R$ {{ item.price }}</strong>
+                </p>
+                <p class="products-page__spec">
+                  <span class="products-page__spec-label">Estoque</span>
+                  <strong class="products-page__spec-value">{{ item.stock }}</strong>
+                </p>
+              </div>
+
+              <div class="products-page__actions">
+                <a
+                  class="products-page__icon-action products-page__icon-action--edit"
+                  [routerLink]="['/products', item.id, 'edit']"
+                  aria-label="Editar produto"
+                  data-tooltip="Editar"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M4 20h4l10.3-10.3a1.4 1.4 0 0 0 0-2l-2-2a1.4 1.4 0 0 0-2 0L4 16v4zM13.4 6.6l4 4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.8"
+                    />
+                  </svg>
+                </a>
+                <button
+                  class="products-page__icon-action products-page__icon-action--delete"
+                  type="button"
+                  [disabled]="productsStore.deletingId() === item.id"
+                  aria-label="Excluir produto"
+                  data-tooltip="Excluir"
+                  (click)="onDelete(item.id)"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M4 7h16M9 7V5.7A1.7 1.7 0 0 1 10.7 4h2.6A1.7 1.7 0 0 1 15 5.7V7M9.5 11v6M14.5 11v6M7.7 7l.7 11a1.9 1.9 0 0 0 1.9 1.8h3.4a1.9 1.9 0 0 0 1.9-1.8l.7-11"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.8"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </li>
         }

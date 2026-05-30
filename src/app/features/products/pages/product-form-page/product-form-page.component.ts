@@ -9,16 +9,22 @@ import {
   UpdateProductPayload,
 } from '../../../../core/models';
 import { ProductApiService } from '../../../../core/services';
+import {
+  CustomSelectComponent,
+  SelectOption,
+} from '../../../../shared/components/custom-select/custom-select.component';
 import { ProductsStore } from '../../store';
 
 @Component({
   selector: 'app-product-form-page',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, CustomSelectComponent],
   templateUrl: './product-form-page.component.html',
   styleUrl: './product-form-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductFormPageComponent implements OnInit {
+  private static readonly imageUrlPattern = /^https?:\/\/.+/i;
+
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
@@ -30,9 +36,20 @@ export class ProductFormPageComponent implements OnInit {
   readonly isSubmitting = signal(false);
   readonly submitError = signal<string | null>(null);
   private productId: string | null = null;
+  readonly statusOptions: readonly SelectOption[] = [
+    { label: 'Ativo', value: 'active' },
+    { label: 'Inativo', value: 'inactive' },
+  ];
 
   readonly form = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
+    imageUrl: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(ProductFormPageComponent.imageUrlPattern),
+      ],
+    ],
     category: ['', [Validators.required, Validators.minLength(2)]],
     price: [0, [Validators.required, Validators.min(0.01)]],
     status: ['active' as ProductStatus, Validators.required],
@@ -44,8 +61,19 @@ export class ProductFormPageComponent implements OnInit {
     this.isEditMode() ? 'Editar produto' : 'Cadastrar produto',
   );
 
-  get controls() {
+  get controls(): typeof this.form.controls {
     return this.form.controls;
+  }
+
+  onStatusChange(value: string | null): void {
+    const parsedStatus = this.parseStatus(value);
+    if (parsedStatus === null) {
+      return;
+    }
+
+    this.controls.status.setValue(parsedStatus);
+    this.controls.status.markAsTouched();
+    this.controls.status.markAsDirty();
   }
 
   ngOnInit(): void {
@@ -113,6 +141,7 @@ export class ProductFormPageComponent implements OnInit {
       const product = await firstValueFrom(this.productApiService.getById(id));
       this.form.setValue({
         name: product.name,
+        imageUrl: product.imageUrl,
         category: product.category,
         price: product.price,
         status: product.status,
@@ -124,5 +153,13 @@ export class ProductFormPageComponent implements OnInit {
     } finally {
       this.isLoadingProduct.set(false);
     }
+  }
+
+  private parseStatus(value: string | null): ProductStatus | null {
+    if (value === 'active' || value === 'inactive') {
+      return value;
+    }
+
+    return null;
   }
 }

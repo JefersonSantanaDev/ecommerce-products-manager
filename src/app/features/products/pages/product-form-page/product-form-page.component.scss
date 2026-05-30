@@ -22,11 +22,16 @@
   padding: 1.15rem;
 }
 
-label {
+label,
+.product-form__field {
   color: var(--color-text-soft);
   display: grid;
   gap: 0.4rem;
   font-weight: 600;
+}
+
+.product-form__field-label {
+  color: inherit;
 }
 
 input,
