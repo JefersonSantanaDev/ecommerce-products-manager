@@ -4,6 +4,13 @@
     <a routerLink="/products/new">Novo produto</a>
   </header>
 
+  <app-product-filters
+    [categories]="productsStore.categories()"
+    [filters]="productsStore.filters()"
+    (filtersChange)="onFiltersChange($event)"
+    (resetFilters)="onResetFilters()"
+  />
+
   @if (productsStore.loading()) {
     <p>Carregando produtos...</p>
   } @else if (productsStore.error()) {

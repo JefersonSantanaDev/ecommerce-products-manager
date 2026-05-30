@@ -1,0 +1,44 @@
+<section class="product-filters">
+  <label>
+    Categoria
+    <select [value]="filters().category ?? ''" (change)="onCategoryChange($event)">
+      <option value="">Todas</option>
+      @for (category of categories(); track category) {
+        <option [value]="category">{{ category }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Status
+    <select [value]="filters().status ?? ''" (change)="onStatusChange($event)">
+      <option value="">Todos</option>
+      <option value="active">Ativo</option>
+      <option value="inactive">Inativo</option>
+    </select>
+  </label>
+
+  <label>
+    Preco minimo
+    <input
+      type="number"
+      [value]="filters().minPrice ?? ''"
+      min="0"
+      step="0.01"
+      (input)="onMinPriceChange($event)"
+    />
+  </label>
+
+  <label>
+    Preco maximo
+    <input
+      type="number"
+      [value]="filters().maxPrice ?? ''"
+      min="0"
+      step="0.01"
+      (input)="onMaxPriceChange($event)"
+    />
+  </label>
+
+  <button type="button" (click)="onReset()">Limpar filtros</button>
+</section>
