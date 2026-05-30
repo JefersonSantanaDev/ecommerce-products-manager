@@ -1,10 +1,10 @@
 <section class="product-form-page">
   <header class="product-form-page__header">
-    <h1>{{ pageTitle }}</h1>
+    <h1>{{ pageTitle() }}</h1>
     <a routerLink="/products">Voltar para lista</a>
   </header>
 
-  @if (isLoadingProduct) {
+  @if (isLoadingProduct()) {
     <p>Carregando produto...</p>
   } @else {
     <form class="product-form" [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -65,14 +65,14 @@
         }
       </label>
 
-      @if (submitError) {
-        <p class="product-form__feedback product-form__feedback--error">{{ submitError }}</p>
+      @if (submitError()) {
+        <p class="product-form__feedback product-form__feedback--error">{{ submitError() }}</p>
       }
 
       <div class="product-form__actions">
         <button type="button" (click)="onCancel()">Cancelar</button>
-        <button type="submit" [disabled]="isSubmitting">
-          {{ isSubmitting ? 'Salvando...' : 'Salvar' }}
+        <button type="submit" [disabled]="isSubmitting()">
+          {{ isSubmitting() ? 'Salvando...' : 'Salvar' }}
         </button>
       </div>
     </form>

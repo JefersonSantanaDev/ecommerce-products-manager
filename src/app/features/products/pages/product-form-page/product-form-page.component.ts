@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -25,10 +25,10 @@ export class ProductFormPageComponent implements OnInit {
   private readonly productApiService = inject(ProductApiService);
   private readonly productsStore = inject(ProductsStore);
 
-  isEditMode = false;
-  isLoadingProduct = false;
-  isSubmitting = false;
-  submitError: string | null = null;
+  readonly isEditMode = signal(false);
+  readonly isLoadingProduct = signal(false);
+  readonly isSubmitting = signal(false);
+  readonly submitError = signal<string | null>(null);
   private productId: string | null = null;
 
   readonly form = this.fb.group({
@@ -40,9 +40,9 @@ export class ProductFormPageComponent implements OnInit {
     stock: [0, [Validators.required, Validators.min(0)]],
   });
 
-  get pageTitle(): string {
-    return this.isEditMode ? 'Editar produto' : 'Cadastrar produto';
-  }
+  readonly pageTitle = computed(() =>
+    this.isEditMode() ? 'Editar produto' : 'Cadastrar produto',
+  );
 
   get controls() {
     return this.form.controls;
@@ -50,7 +50,7 @@ export class ProductFormPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id');
-    this.isEditMode = this.productId !== null;
+    this.isEditMode.set(this.productId !== null);
 
     if (!this.productId) {
       return;
@@ -60,25 +60,25 @@ export class ProductFormPageComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    this.submitError = null;
+    this.submitError.set(null);
 
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    this.isSubmitting = true;
+    this.isSubmitting.set(true);
     try {
       const formValue = this.form.getRawValue();
 
-      if (this.isEditMode && this.productId) {
+      if (this.isEditMode() && this.productId) {
         const payload: UpdateProductPayload = {
           id: this.productId,
           ...formValue,
         };
         const updated = await this.productsStore.updateById(this.productId, payload);
         if (!updated) {
-          this.submitError = 'Nao foi possivel salvar o produto.';
+          this.submitError.set('Nao foi possivel salvar o produto.');
           return;
         }
       } else {
@@ -88,16 +88,16 @@ export class ProductFormPageComponent implements OnInit {
         };
         const created = await this.productsStore.create(payload);
         if (!created) {
-          this.submitError = 'Nao foi possivel salvar o produto.';
+          this.submitError.set('Nao foi possivel salvar o produto.');
           return;
         }
       }
 
       await this.router.navigateByUrl('/products');
     } catch {
-      this.submitError = 'Nao foi possivel salvar o produto.';
+      this.submitError.set('Nao foi possivel salvar o produto.');
     } finally {
-      this.isSubmitting = false;
+      this.isSubmitting.set(false);
     }
   }
 
@@ -106,8 +106,8 @@ export class ProductFormPageComponent implements OnInit {
   }
 
   private async loadProduct(id: string): Promise<void> {
-    this.isLoadingProduct = true;
-    this.submitError = null;
+    this.isLoadingProduct.set(true);
+    this.submitError.set(null);
 
     try {
       const product = await firstValueFrom(this.productApiService.getById(id));
@@ -120,9 +120,9 @@ export class ProductFormPageComponent implements OnInit {
         stock: product.stock,
       });
     } catch {
-      this.submitError = 'Nao foi possivel carregar os dados do produto.';
+      this.submitError.set('Nao foi possivel carregar os dados do produto.');
     } finally {
-      this.isLoadingProduct = false;
+      this.isLoadingProduct.set(false);
     }
   }
 }
