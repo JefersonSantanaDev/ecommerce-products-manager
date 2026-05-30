@@ -9,6 +9,7 @@ import {
   UpdateProductPayload,
 } from '../../../../core/models';
 import { ProductApiService } from '../../../../core/services';
+import { ProductsStore } from '../../store';
 
 @Component({
   selector: 'app-product-form-page',
@@ -22,12 +23,12 @@ export class ProductFormPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly productApiService = inject(ProductApiService);
+  private readonly productsStore = inject(ProductsStore);
 
   isEditMode = false;
   isLoadingProduct = false;
   isSubmitting = false;
   submitError: string | null = null;
-  submitSuccess: string | null = null;
   private productId: string | null = null;
 
   readonly form = this.fb.group({
@@ -60,7 +61,6 @@ export class ProductFormPageComponent implements OnInit {
 
   async onSubmit(): Promise<void> {
     this.submitError = null;
-    this.submitSuccess = null;
 
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -76,24 +76,24 @@ export class ProductFormPageComponent implements OnInit {
           id: this.productId,
           ...formValue,
         };
-        await firstValueFrom(this.productApiService.update(this.productId, payload));
-        this.submitSuccess = 'Produto atualizado com sucesso.';
+        const updated = await this.productsStore.updateById(this.productId, payload);
+        if (!updated) {
+          this.submitError = 'Nao foi possivel salvar o produto.';
+          return;
+        }
       } else {
         const payload: CreateProductPayload = {
           ...formValue,
           createdAt: new Date().toISOString(),
         };
-        await firstValueFrom(this.productApiService.create(payload));
-        this.submitSuccess = 'Produto cadastrado com sucesso.';
-        this.form.reset({
-          name: '',
-          category: '',
-          price: 0,
-          status: 'active',
-          description: '',
-          stock: 0,
-        });
+        const created = await this.productsStore.create(payload);
+        if (!created) {
+          this.submitError = 'Nao foi possivel salvar o produto.';
+          return;
+        }
       }
+
+      await this.router.navigateByUrl('/products');
     } catch {
       this.submitError = 'Nao foi possivel salvar o produto.';
     } finally {

@@ -69,10 +69,6 @@
         <p class="product-form__feedback product-form__feedback--error">{{ submitError }}</p>
       }
 
-      @if (submitSuccess) {
-        <p class="product-form__feedback product-form__feedback--success">{{ submitSuccess }}</p>
-      }
-
       <div class="product-form__actions">
         <button type="button" (click)="onCancel()">Cancelar</button>
         <button type="submit" [disabled]="isSubmitting">
