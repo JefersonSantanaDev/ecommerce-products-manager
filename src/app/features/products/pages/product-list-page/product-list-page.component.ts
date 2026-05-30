@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
+import { ProductsStore } from '../../store';
 
 @Component({
   selector: 'app-product-list-page',
@@ -8,4 +10,10 @@ import { RouterLink } from '@angular/router';
   styleUrl: './product-list-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductListPageComponent {}
+export class ProductListPageComponent implements OnInit {
+  readonly productsStore = inject(ProductsStore);
+
+  ngOnInit(): void {
+    this.productsStore.loadAll();
+  }
+}

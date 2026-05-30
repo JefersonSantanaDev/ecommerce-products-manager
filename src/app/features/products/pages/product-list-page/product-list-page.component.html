@@ -4,5 +4,17 @@
     <a routerLink="/products/new">Novo produto</a>
   </header>
 
-  <p>Listagem e filtros serao implementados na proxima etapa.</p>
+  @if (productsStore.loading()) {
+    <p>Carregando produtos...</p>
+  } @else if (productsStore.error()) {
+    <p>{{ productsStore.error() }}</p>
+  } @else {
+    <p>Total de produtos: {{ productsStore.filteredItems().length }}</p>
+
+    <ul>
+      @for (item of productsStore.filteredItems(); track item.id) {
+        <li>{{ item.name }} - {{ item.category }} - R$ {{ item.price }}</li>
+      }
+    </ul>
+  }
 </section>
