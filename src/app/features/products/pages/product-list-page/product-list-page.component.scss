@@ -20,15 +20,15 @@
 }
 
 .products-page__feedback--success {
-  background-color: #ecfdf3;
-  border: 1px solid #abefc6;
-  color: #067647;
+  background-color: color-mix(in srgb, var(--color-accent) 9%, #fff);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+  color: var(--color-brand);
 }
 
 .products-page__feedback--error {
-  background-color: #fef3f2;
-  border: 1px solid #fecdca;
-  color: #b42318;
+  background-color: color-mix(in srgb, var(--color-danger) 8%, #fff);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 38%, var(--color-border));
+  color: var(--color-danger);
 }
 
 ul {
@@ -41,12 +41,20 @@ ul {
 
 li {
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 12%, var(--color-border));
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-soft);
   display: grid;
   gap: 0.5rem;
   padding: 0.9rem;
+  transition: transform var(--transition-standard), box-shadow var(--transition-standard),
+    border-color var(--transition-standard);
+}
+
+li:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.09);
+  transform: translateY(-1px);
 }
 
 p {
@@ -59,22 +67,58 @@ p {
   justify-content: space-between;
 }
 
+.products-page__status {
+  border-radius: 999px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 0.2rem 0.62rem;
+}
+
+.products-page__status--active {
+  background-color: color-mix(in srgb, var(--color-accent) 13%, #fff);
+  color: var(--color-brand);
+}
+
+.products-page__status--inactive {
+  background-color: color-mix(in srgb, var(--color-danger) 12%, #fff);
+  color: var(--color-danger);
+}
+
 .products-page__actions {
   display: flex;
   gap: 0.75rem;
   justify-content: flex-end;
 }
 
-button {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+.products-page__action-link {
+  align-items: center;
+  border: 1px solid transparent;
   border-radius: var(--radius-pill);
-  color: var(--color-brand);
-  cursor: pointer;
-  font: inherit;
+  display: inline-flex;
+  font-size: 0.95rem;
   font-weight: 700;
+  justify-content: center;
   min-height: 2.25rem;
   padding: 0.4rem 0.9rem;
+  text-decoration: none;
+  transition: border-color var(--transition-standard), background-color var(--transition-standard),
+    color var(--transition-standard), transform var(--transition-standard);
+}
+
+.products-page__action-link:hover {
+  background-color: color-mix(in srgb, var(--color-accent) 7%, #fff);
+  border-color: color-mix(in srgb, var(--color-accent) 35%, var(--color-border));
+  transform: translateY(-1px);
+}
+
+.products-page__delete-btn {
+  color: var(--color-danger);
+}
+
+.products-page__delete-btn:hover {
+  background-color: color-mix(in srgb, var(--color-danger) 8%, #fff);
+  border-color: color-mix(in srgb, var(--color-danger) 40%, var(--color-border));
+  color: var(--color-danger);
 }
 
 button:disabled {

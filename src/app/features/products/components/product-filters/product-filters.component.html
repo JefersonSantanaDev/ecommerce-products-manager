@@ -1,26 +1,32 @@
 <section class="product-filters">
-  <label>
-    Categoria
-    <select [value]="filters().category ?? ''" (change)="onCategoryChange($event)">
-      <option value="">Todas</option>
-      @for (category of categories(); track category) {
-        <option [value]="category">{{ category }}</option>
-      }
-    </select>
-  </label>
+  <div class="product-filters__field">
+    <span class="product-filters__label">Categoria</span>
+    <app-custom-select
+      label="Categoria"
+      placeholder="Selecione uma categoria"
+      emptyOptionLabel="Todas"
+      [options]="categoryOptions()"
+      [value]="filters().category"
+      (valueChange)="onCategoryChange($event)"
+    />
+  </div>
 
-  <label>
-    Status
-    <select [value]="filters().status ?? ''" (change)="onStatusChange($event)">
-      <option value="">Todos</option>
-      <option value="active">Ativo</option>
-      <option value="inactive">Inativo</option>
-    </select>
-  </label>
+  <div class="product-filters__field">
+    <span class="product-filters__label">Status</span>
+    <app-custom-select
+      label="Status"
+      placeholder="Selecione um status"
+      emptyOptionLabel="Todos"
+      [options]="statusOptions"
+      [value]="filters().status"
+      (valueChange)="onStatusChange($event)"
+    />
+  </div>
 
-  <label>
-    Preco minimo
+  <label class="product-filters__field">
+    <span class="product-filters__label">Preco minimo</span>
     <input
+      class="product-filters__control"
       type="number"
       [value]="filters().minPrice ?? ''"
       min="0"
@@ -29,9 +35,10 @@
     />
   </label>
 
-  <label>
-    Preco maximo
+  <label class="product-filters__field">
+    <span class="product-filters__label">Preco maximo</span>
     <input
+      class="product-filters__control"
       type="number"
       [value]="filters().maxPrice ?? ''"
       min="0"
@@ -40,5 +47,5 @@
     />
   </label>
 
-  <button type="button" (click)="onReset()">Limpar filtros</button>
+  <button class="product-filters__button" type="button" (click)="onReset()">Limpar filtros</button>
 </section>

@@ -1,3 +1,22 @@
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" routerLink="/products">
+      <img class="brand__logo" src="/assets/brand/logo-cropped.png" alt="Claps" />
+    </a>
+
+    <nav class="topbar__nav">
+      <a
+        routerLink="/products"
+        routerLinkActive="topbar__link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Produtos
+      </a>
+      <a routerLink="/products/new" routerLinkActive="topbar__link--active">Novo produto</a>
+    </nav>
+  </div>
+</header>
+
 <main class="app-shell">
   <router-outlet />
 </main>

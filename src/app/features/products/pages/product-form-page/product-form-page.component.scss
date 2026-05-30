@@ -12,14 +12,14 @@
 
 .product-form {
   background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 14%, var(--color-border));
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-soft);
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   margin-top: 1.5rem;
-  padding: 1rem;
+  padding: 1.15rem;
 }
 
 label {
@@ -32,10 +32,7 @@ label {
 input,
 select,
 textarea {
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  font: inherit;
-  padding: 0.625rem 0.75rem;
+  border-color: color-mix(in srgb, var(--color-brand) 10%, var(--color-border));
 }
 
 small {
@@ -62,14 +59,21 @@ small {
   justify-content: flex-end;
 }
 
-button {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  font: inherit;
-  font-weight: 700;
-  min-height: 2.5rem;
-  padding: 0.5rem 1rem;
+.product-form__secondary-btn {
+  background-color: #fff;
+  color: var(--color-brand);
+}
+
+.product-form__primary-btn {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.product-form__primary-btn:hover {
+  background-color: color-mix(in srgb, var(--color-accent) 88%, #fff);
+  border-color: color-mix(in srgb, var(--color-accent) 88%, #fff);
+  color: #fff;
 }
 
 @media (max-width: 720px) {

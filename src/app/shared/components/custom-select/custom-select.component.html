@@ -1,0 +1,41 @@
+<div class="custom-select">
+  <button
+    class="custom-select__trigger"
+    type="button"
+    [disabled]="disabled()"
+    [attr.aria-label]="label()"
+    [attr.aria-expanded]="expanded()"
+    [attr.aria-haspopup]="'listbox'"
+    [attr.aria-controls]="listboxId"
+    [attr.aria-activedescendant]="expanded() ? getOptionId(activeIndex()) : null"
+    (click)="toggleDropdown()"
+    (keydown)="onTriggerKeydown($event)"
+  >
+    <span class="custom-select__value" [class.custom-select__value--placeholder]="!hasValue()">
+      {{ displayValue() }}
+    </span>
+    <span class="custom-select__chevron" [class.custom-select__chevron--open]="expanded()"></span>
+  </button>
+
+  @if (expanded()) {
+    <ul class="custom-select__menu" role="listbox" [id]="listboxId" [attr.aria-label]="label()">
+      @for (option of optionsList(); track option.value ?? 'empty'; let optionIndex = $index) {
+        <li role="presentation">
+          <button
+            class="custom-select__option"
+            type="button"
+            role="option"
+            [id]="getOptionId(optionIndex)"
+            [attr.aria-selected]="isOptionSelected(optionIndex)"
+            [class.custom-select__option--active]="isOptionActive(optionIndex)"
+            [class.custom-select__option--selected]="isOptionSelected(optionIndex)"
+            (mouseenter)="onOptionMouseEnter(optionIndex)"
+            (click)="onOptionClick(optionIndex)"
+          >
+            {{ option.label }}
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</div>

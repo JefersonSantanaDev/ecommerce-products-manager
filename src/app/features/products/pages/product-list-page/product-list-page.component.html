@@ -33,7 +33,13 @@
           <li>
             <div class="products-page__item-header">
               <strong>{{ item.name }}</strong>
-              <span>{{ item.status === 'active' ? 'Ativo' : 'Inativo' }}</span>
+              <span
+                class="products-page__status"
+                [class.products-page__status--active]="item.status === 'active'"
+                [class.products-page__status--inactive]="item.status !== 'active'"
+              >
+                {{ item.status === 'active' ? 'Ativo' : 'Inativo' }}
+              </span>
             </div>
 
             <p>Categoria: {{ item.category }}</p>
@@ -41,8 +47,11 @@
             <p>Estoque: {{ item.stock }}</p>
 
             <div class="products-page__actions">
-              <a [routerLink]="['/products', item.id, 'edit']">Editar</a>
+              <a class="products-page__action-link" [routerLink]="['/products', item.id, 'edit']">
+                Editar
+              </a>
               <button
+                class="products-page__delete-btn"
                 type="button"
                 [disabled]="productsStore.deletingId() === item.id"
                 (click)="onDelete(item.id)"

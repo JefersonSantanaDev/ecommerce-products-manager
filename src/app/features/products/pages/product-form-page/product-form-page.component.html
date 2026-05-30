@@ -70,8 +70,8 @@
       }
 
       <div class="product-form__actions">
-        <button type="button" (click)="onCancel()">Cancelar</button>
-        <button type="submit" [disabled]="isSubmitting()">
+        <button class="product-form__secondary-btn" type="button" (click)="onCancel()">Cancelar</button>
+        <button class="product-form__primary-btn" type="submit" [disabled]="isSubmitting()">
           {{ isSubmitting() ? 'Salvando...' : 'Salvar' }}
         </button>
       </div>
