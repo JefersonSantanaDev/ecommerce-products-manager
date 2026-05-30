@@ -17,6 +17,7 @@ interface ProductsState {
   loading: boolean;
   deletingId: string | null;
   error: string | null;
+  notice: string | null;
   filters: ProductFilters;
 }
 
@@ -25,6 +26,7 @@ const initialState: ProductsState = {
   loading: false,
   deletingId: null,
   error: null,
+  notice: null,
   filters: INITIAL_PRODUCT_FILTERS,
 };
 
@@ -70,6 +72,7 @@ export const ProductsStore = signalStore(
         const created = await firstValueFrom(api.create(payload));
         patchState(store, (state) => ({
           loading: false,
+          notice: 'Produto cadastrado com sucesso.',
           items: [created, ...state.items],
         }));
         return true;
@@ -88,6 +91,7 @@ export const ProductsStore = signalStore(
         const updated = await firstValueFrom(api.update(id, payload));
         patchState(store, (state) => ({
           loading: false,
+          notice: 'Produto atualizado com sucesso.',
           items: state.items.map((item) => (item.id === id ? updated : item)),
         }));
         return true;
@@ -106,6 +110,7 @@ export const ProductsStore = signalStore(
         await firstValueFrom(api.remove(id));
         patchState(store, (state) => ({
           deletingId: null,
+          notice: 'Produto excluido com sucesso.',
           items: state.items.filter((item) => item.id !== id),
         }));
       } catch {
@@ -114,6 +119,9 @@ export const ProductsStore = signalStore(
           error: 'Nao foi possivel excluir o produto.',
         });
       }
+    },
+    clearNotice(): void {
+      patchState(store, { notice: null });
     },
   })),
 );

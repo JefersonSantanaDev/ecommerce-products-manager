@@ -35,4 +35,8 @@ export class ProductListPageComponent implements OnInit {
 
     await this.productsStore.removeById(id);
   }
+
+  onClearNotice(): void {
+    this.productsStore.clearNotice();
+  }
 }

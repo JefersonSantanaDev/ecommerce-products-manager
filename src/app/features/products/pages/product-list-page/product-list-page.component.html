@@ -11,37 +11,48 @@
     (resetFilters)="onResetFilters()"
   />
 
+  @if (productsStore.notice()) {
+    <div class="products-page__feedback products-page__feedback--success" role="status">
+      <span>{{ productsStore.notice() }}</span>
+      <button type="button" (click)="onClearNotice()">Fechar</button>
+    </div>
+  }
+
   @if (productsStore.loading()) {
     <p>Carregando produtos...</p>
   } @else if (productsStore.error()) {
-    <p>{{ productsStore.error() }}</p>
+    <p class="products-page__feedback products-page__feedback--error">{{ productsStore.error() }}</p>
   } @else {
     <p>Total de produtos: {{ productsStore.filteredItems().length }}</p>
 
-    <ul>
-      @for (item of productsStore.filteredItems(); track item.id) {
-        <li>
-          <div class="products-page__item-header">
-            <strong>{{ item.name }}</strong>
-            <span>{{ item.status === 'active' ? 'Ativo' : 'Inativo' }}</span>
-          </div>
+    @if (productsStore.filteredItems().length === 0) {
+      <p>Nenhum produto encontrado para os filtros aplicados.</p>
+    } @else {
+      <ul>
+        @for (item of productsStore.filteredItems(); track item.id) {
+          <li>
+            <div class="products-page__item-header">
+              <strong>{{ item.name }}</strong>
+              <span>{{ item.status === 'active' ? 'Ativo' : 'Inativo' }}</span>
+            </div>
 
-          <p>Categoria: {{ item.category }}</p>
-          <p>Preco: R$ {{ item.price }}</p>
-          <p>Estoque: {{ item.stock }}</p>
+            <p>Categoria: {{ item.category }}</p>
+            <p>Preco: R$ {{ item.price }}</p>
+            <p>Estoque: {{ item.stock }}</p>
 
-          <div class="products-page__actions">
-            <a [routerLink]="['/products', item.id, 'edit']">Editar</a>
-            <button
-              type="button"
-              [disabled]="productsStore.deletingId() === item.id"
-              (click)="onDelete(item.id)"
-            >
-              {{ productsStore.deletingId() === item.id ? 'Excluindo...' : 'Excluir' }}
-            </button>
-          </div>
-        </li>
-      }
-    </ul>
+            <div class="products-page__actions">
+              <a [routerLink]="['/products', item.id, 'edit']">Editar</a>
+              <button
+                type="button"
+                [disabled]="productsStore.deletingId() === item.id"
+                (click)="onDelete(item.id)"
+              >
+                {{ productsStore.deletingId() === item.id ? 'Excluindo...' : 'Excluir' }}
+              </button>
+            </div>
+          </li>
+        }
+      </ul>
+    }
   }
 </section>

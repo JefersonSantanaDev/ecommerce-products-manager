@@ -10,6 +10,27 @@
   justify-content: space-between;
 }
 
+.products-page__feedback {
+  align-items: center;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+}
+
+.products-page__feedback--success {
+  background-color: #ecfdf3;
+  border: 1px solid #abefc6;
+  color: #067647;
+}
+
+.products-page__feedback--error {
+  background-color: #fef3f2;
+  border: 1px solid #fecdca;
+  color: #b42318;
+}
+
 ul {
   display: grid;
   gap: 0.75rem;
