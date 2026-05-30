@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-canvas: #f2f0eb;
+  --color-surface: #ffffff;
+  --color-ceramic: #edebe9;
+  --color-brand: #006241;
+  --color-accent: #00754a;
+  --color-brand-dark: #1e3932;
+  --color-text: rgba(0, 0, 0, 0.87);
+  --color-text-soft: rgba(0, 0, 0, 0.58);
+  --color-border: #d6dbde;
+  --color-danger: #b42318;
+  --radius-card: 12px;
+  --radius-pill: 50px;
+  --shadow-card: 0 0 0.5px rgba(0, 0, 0, 0.14), 0 1px 1px rgba(0, 0, 0, 0.24);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: linear-gradient(180deg, var(--color-canvas) 0%, var(--color-ceramic) 100%);
+  color: var(--color-text);
+  font-family: 'Manrope', 'Trebuchet MS', 'Segoe UI', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--color-brand);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}

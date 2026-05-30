@@ -40,11 +40,13 @@ ul {
 }
 
 li {
-  border: 1px solid #d3d3d3;
-  border-radius: 0.5rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
   display: grid;
   gap: 0.5rem;
-  padding: 0.75rem;
+  padding: 0.9rem;
 }
 
 p {
@@ -64,10 +66,13 @@ p {
 }
 
 button {
-  border: 1px solid #d3d3d3;
-  border-radius: 999px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-brand);
   cursor: pointer;
   font: inherit;
+  font-weight: 700;
   min-height: 2.25rem;
   padding: 0.4rem 0.9rem;
 }
@@ -75,4 +80,32 @@ button {
 button:disabled {
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+@media (max-width: 720px) {
+  .products-page {
+    padding: 1rem;
+  }
+
+  .products-page__header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .products-page__feedback {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .products-page__actions {
+    justify-content: stretch;
+  }
+
+  .products-page__actions a,
+  .products-page__actions button {
+    text-align: center;
+    width: 100%;
+  }
 }

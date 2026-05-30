@@ -1,16 +1,47 @@
 .product-filters {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   margin-block: 1.5rem;
+  padding: 1rem;
 }
 
 label {
+  color: var(--color-text-soft);
   display: grid;
   gap: 0.375rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+select,
+input,
+button {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  font: inherit;
+  min-height: 2.5rem;
+  padding: 0.45rem 0.7rem;
 }
 
 button {
   align-self: end;
-  height: 2.5rem;
+  background-color: var(--color-surface);
+  color: var(--color-brand);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .product-filters {
+    grid-template-columns: 1fr;
+  }
+
+  button {
+    width: 100%;
+  }
 }
