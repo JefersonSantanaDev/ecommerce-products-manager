@@ -1,8 +1,84 @@
 <section class="product-form-page">
   <header class="product-form-page__header">
-    <h1>Cadastro de produto</h1>
+    <h1>{{ pageTitle }}</h1>
     <a routerLink="/products">Voltar para lista</a>
   </header>
 
-  <p>Formulario de criacao e edicao sera implementado na proxima etapa.</p>
+  @if (isLoadingProduct) {
+    <p>Carregando produto...</p>
+  } @else {
+    <form class="product-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <label>
+        Nome
+        <input type="text" formControlName="name" />
+        @if (controls.name.touched && controls.name.hasError('required')) {
+          <small>Nome e obrigatorio.</small>
+        }
+        @if (controls.name.touched && controls.name.hasError('minlength')) {
+          <small>Nome precisa ter pelo menos 3 caracteres.</small>
+        }
+      </label>
+
+      <label>
+        Categoria
+        <input type="text" formControlName="category" />
+        @if (controls.category.touched && controls.category.hasError('required')) {
+          <small>Categoria e obrigatoria.</small>
+        }
+      </label>
+
+      <label>
+        Preco
+        <input type="number" min="0" step="0.01" formControlName="price" />
+        @if (controls.price.touched && controls.price.hasError('required')) {
+          <small>Preco e obrigatorio.</small>
+        }
+        @if (controls.price.touched && controls.price.hasError('min')) {
+          <small>Preco deve ser maior que zero.</small>
+        }
+      </label>
+
+      <label>
+        Status
+        <select formControlName="status">
+          <option value="active">Ativo</option>
+          <option value="inactive">Inativo</option>
+        </select>
+      </label>
+
+      <label>
+        Estoque
+        <input type="number" min="0" step="1" formControlName="stock" />
+        @if (controls.stock.touched && controls.stock.hasError('required')) {
+          <small>Estoque e obrigatorio.</small>
+        }
+        @if (controls.stock.touched && controls.stock.hasError('min')) {
+          <small>Estoque nao pode ser negativo.</small>
+        }
+      </label>
+
+      <label class="product-form__full-width">
+        Descricao
+        <textarea rows="4" formControlName="description"></textarea>
+        @if (controls.description.touched && controls.description.hasError('required')) {
+          <small>Descricao e obrigatoria.</small>
+        }
+      </label>
+
+      @if (submitError) {
+        <p class="product-form__feedback product-form__feedback--error">{{ submitError }}</p>
+      }
+
+      @if (submitSuccess) {
+        <p class="product-form__feedback product-form__feedback--success">{{ submitSuccess }}</p>
+      }
+
+      <div class="product-form__actions">
+        <button type="button" (click)="onCancel()">Cancelar</button>
+        <button type="submit" [disabled]="isSubmitting">
+          {{ isSubmitting ? 'Salvando...' : 'Salvar' }}
+        </button>
+      </div>
+    </form>
+  }
 </section>

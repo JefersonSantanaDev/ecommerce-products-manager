@@ -13,6 +13,7 @@ import { applyProductFilters } from './product-filters.util';
 interface ProductsState {
   items: Product[];
   loading: boolean;
+  deletingId: string | null;
   error: string | null;
   filters: ProductFilters;
 }
@@ -20,6 +21,7 @@ interface ProductsState {
 const initialState: ProductsState = {
   items: [],
   loading: false,
+  deletingId: null,
   error: null,
   filters: INITIAL_PRODUCT_FILTERS,
 };
@@ -58,6 +60,22 @@ export const ProductsStore = signalStore(
     },
     resetFilters(): void {
       patchState(store, { filters: INITIAL_PRODUCT_FILTERS });
+    },
+    async removeById(id: string): Promise<void> {
+      patchState(store, { deletingId: id, error: null });
+
+      try {
+        await firstValueFrom(api.remove(id));
+        patchState(store, (state) => ({
+          deletingId: null,
+          items: state.items.filter((item) => item.id !== id),
+        }));
+      } catch {
+        patchState(store, {
+          deletingId: null,
+          error: 'Nao foi possivel excluir o produto.',
+        });
+      }
     },
   })),
 );

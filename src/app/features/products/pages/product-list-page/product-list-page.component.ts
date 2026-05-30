@@ -26,4 +26,13 @@ export class ProductListPageComponent implements OnInit {
   onResetFilters(): void {
     this.productsStore.resetFilters();
   }
+
+  async onDelete(id: string): Promise<void> {
+    const confirmed = window.confirm('Deseja realmente excluir este produto?');
+    if (!confirmed) {
+      return;
+    }
+
+    await this.productsStore.removeById(id);
+  }
 }

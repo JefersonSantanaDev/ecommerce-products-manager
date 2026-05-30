@@ -20,7 +20,27 @@
 
     <ul>
       @for (item of productsStore.filteredItems(); track item.id) {
-        <li>{{ item.name }} - {{ item.category }} - R$ {{ item.price }}</li>
+        <li>
+          <div class="products-page__item-header">
+            <strong>{{ item.name }}</strong>
+            <span>{{ item.status === 'active' ? 'Ativo' : 'Inativo' }}</span>
+          </div>
+
+          <p>Categoria: {{ item.category }}</p>
+          <p>Preco: R$ {{ item.price }}</p>
+          <p>Estoque: {{ item.stock }}</p>
+
+          <div class="products-page__actions">
+            <a [routerLink]="['/products', item.id, 'edit']">Editar</a>
+            <button
+              type="button"
+              [disabled]="productsStore.deletingId() === item.id"
+              (click)="onDelete(item.id)"
+            >
+              {{ productsStore.deletingId() === item.id ? 'Excluindo...' : 'Excluir' }}
+            </button>
+          </div>
+        </li>
       }
     </ul>
   }
