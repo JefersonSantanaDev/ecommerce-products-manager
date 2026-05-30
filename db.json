@@ -1,0 +1,54 @@
+{
+  "products": [
+    {
+      "id": "p1",
+      "name": "Teclado Mecanico ABNT2",
+      "category": "Perifericos",
+      "price": 399.9,
+      "status": "active",
+      "description": "Switch brown, formato TKL",
+      "stock": 18,
+      "createdAt": "2026-05-30T12:00:00.000Z"
+    },
+    {
+      "id": "p2",
+      "name": "Mouse Gamer 26000 DPI",
+      "category": "Perifericos",
+      "price": 289.5,
+      "status": "active",
+      "description": "Sensor optico de alta precisao",
+      "stock": 32,
+      "createdAt": "2026-05-30T12:05:00.000Z"
+    },
+    {
+      "id": "p3",
+      "name": "Monitor 27 Polegadas IPS",
+      "category": "Monitores",
+      "price": 1399.0,
+      "status": "inactive",
+      "description": "Taxa de atualizacao de 165Hz",
+      "stock": 7,
+      "createdAt": "2026-05-30T12:10:00.000Z"
+    },
+    {
+      "id": "p4",
+      "name": "Notebook i7 16GB RAM",
+      "category": "Computadores",
+      "price": 5899.0,
+      "status": "active",
+      "description": "SSD 1TB NVMe",
+      "stock": 5,
+      "createdAt": "2026-05-30T12:15:00.000Z"
+    },
+    {
+      "id": "p5",
+      "name": "Headset Bluetooth",
+      "category": "Audio",
+      "price": 499.99,
+      "status": "inactive",
+      "description": "Cancelamento ativo de ruido",
+      "stock": 11,
+      "createdAt": "2026-05-30T12:20:00.000Z"
+    }
+  ]
+}
