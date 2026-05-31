@@ -1,0 +1,158 @@
+{
+  "products": [
+    {
+      "id": "p1",
+      "name": "Teclado Mecanico ABNT2",
+      "imageUrl": "/assets/products/keyboard.jpg",
+      "category": "Perifericos",
+      "price": 399.9,
+      "status": "active",
+      "description": "Switch brown, formato TKL",
+      "stock": 18,
+      "createdAt": "2026-05-30T12:00:00.000Z"
+    },
+    {
+      "id": "p2",
+      "name": "Mouse Gamer 26000 DPI",
+      "imageUrl": "/assets/products/mouse.jpg",
+      "category": "Perifericos",
+      "price": 289.5,
+      "status": "active",
+      "description": "Sensor optico de alta precisao",
+      "stock": 30
+    },
+    {
+      "id": "p3",
+      "name": "Monitor 27 Polegadas IPS",
+      "imageUrl": "/assets/products/monitor.jpg",
+      "category": "Monitores",
+      "price": 1399,
+      "status": "inactive",
+      "description": "Taxa de atualizacao de 165Hz",
+      "stock": 7,
+      "createdAt": "2026-05-30T12:10:00.000Z"
+    },
+    {
+      "id": "p4",
+      "name": "Notebook i7 16GB RAM",
+      "imageUrl": "/assets/products/laptop.jpg",
+      "category": "Computadores",
+      "price": 5899,
+      "status": "active",
+      "description": "SSD 1TB NVMe",
+      "stock": 5,
+      "createdAt": "2026-05-30T12:15:00.000Z"
+    },
+    {
+      "id": "p5",
+      "name": "Headset Bluetooth",
+      "imageUrl": "/assets/products/headset.jpg",
+      "category": "Audio",
+      "price": 499.99,
+      "status": "inactive",
+      "description": "Cancelamento ativo de ruido",
+      "stock": 11,
+      "createdAt": "2026-05-30T12:20:00.000Z"
+    },
+    {
+      "id": "p6",
+      "name": "Monitor Ultrawide 34 Curvo",
+      "imageUrl": "/assets/products/monitor-wide.jpg",
+      "category": "Monitores",
+      "price": 2799,
+      "status": "active",
+      "description": "Painel VA com 144Hz e HDR",
+      "stock": 6,
+      "createdAt": "2026-05-30T12:25:00.000Z"
+    },
+    {
+      "id": "p7",
+      "name": "Cadeira Gamer Ergonomica",
+      "imageUrl": "/assets/products/chair.jpg",
+      "category": "Perifericos",
+      "price": 1199.9,
+      "status": "active",
+      "description": "Ajuste lombar e apoio 4D",
+      "stock": 13,
+      "createdAt": "2026-05-30T12:30:00.000Z"
+    },
+    {
+      "id": "p8",
+      "name": "Caixa de Som 2.1 Bluetooth",
+      "imageUrl": "/assets/products/speaker.jpg",
+      "category": "Audio",
+      "price": 649.9,
+      "status": "active",
+      "description": "Subwoofer dedicado com graves fortes",
+      "stock": 9,
+      "createdAt": "2026-05-30T12:35:00.000Z"
+    },
+    {
+      "id": "p9",
+      "name": "Webcam Full HD 60fps",
+      "imageUrl": "/assets/products/webcam.jpg",
+      "category": "Perifericos",
+      "price": 359,
+      "status": "active",
+      "description": "Foco automatico e microfones duplos",
+      "stock": 15,
+      "createdAt": "2026-05-30T12:40:00.000Z"
+    },
+    {
+      "id": "p10",
+      "name": "SSD NVMe 2TB Gen4",
+      "imageUrl": "/assets/products/ssd.jpg",
+      "category": "Computadores",
+      "price": 1099,
+      "status": "inactive",
+      "description": "Leitura de ate 7000MB/s",
+      "stock": 21,
+      "createdAt": "2026-05-30T12:45:00.000Z"
+    },
+    {
+      "id": "p11",
+      "name": "Notebook Ryzen 7 32GB",
+      "imageUrl": "/assets/products/notebook-gamer.jpg",
+      "category": "Computadores",
+      "price": 6999,
+      "status": "active",
+      "description": "Tela 16 polegadas 2.5K e RTX dedicada",
+      "stock": 4,
+      "createdAt": "2026-05-30T12:50:00.000Z"
+    },
+    {
+      "id": "p12",
+      "name": "Fone In Ear ANC",
+      "imageUrl": "/assets/products/earbuds.jpg",
+      "category": "Audio",
+      "price": 799.9,
+      "status": "inactive",
+      "description": "Cancelamento de ruido adaptativo",
+      "stock": 17,
+      "createdAt": "2026-05-30T12:55:00.000Z"
+    },
+    {
+      "id": "nkA3ldxidZ0",
+      "name": "Produto E2E edit-1780231715077",
+      "imageUrl": "/assets/products/mouse.jpg",
+      "category": "Perifericos",
+      "price": 799.9,
+      "status": "active",
+      "description": "Produto criado por automacao E2E.",
+      "stock": 20,
+      "createdAt": "2026-05-31T12:48:35.077Z"
+    },
+    {
+      "id": "DpHyJVeD2iA",
+      "name": "Produto E2E delete-1780231724393",
+      "imageUrl": "/assets/products/mouse.jpg",
+      "category": "Perifericos",
+      "price": 799.9,
+      "status": "active",
+      "description": "Produto criado por automacao E2E.",
+      "stock": 20,
+      "createdAt": "2026-05-31T12:48:44.394Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

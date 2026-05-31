@@ -10,9 +10,14 @@
     "test": "jest --runInBand",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "e2e:reset-db": "node ./e2e/scripts/reset-db.mjs",
+    "e2e": "npm run e2e:reset-db && playwright test",
+    "e2e:headed": "npm run e2e:reset-db && playwright test --headed",
+    "e2e:ui": "npm run e2e:reset-db && playwright test --ui",
     "lint": "ng lint",
     "api:mock": "json-server --watch db.json --port 3000",
-    "api:mock:readonly": "json-server --watch db.json --port 3000 --read-only"
+    "api:mock:readonly": "json-server --watch db.json --port 3000 --read-only",
+    "api:mock:e2e": "json-server --watch e2e/fixtures/db.e2e.json --port 3000"
   },
   "private": true,
   "packageManager": "npm@11.12.1",
@@ -32,6 +37,7 @@
     "@angular/cli": "^21.2.12",
     "@angular/compiler-cli": "^21.2.0",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.60.0",
     "@types/jest": "^30.0.0",
     "angular-eslint": "21.4.0",
     "eslint": "^10.3.0",
