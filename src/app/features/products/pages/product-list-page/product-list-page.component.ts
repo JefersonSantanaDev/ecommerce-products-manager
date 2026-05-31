@@ -77,4 +77,14 @@ export class ProductListPageComponent implements OnInit {
 
     return formatCurrencyToBrl(value);
   }
+
+  hasActiveFilters(): boolean {
+    const currentFilters = this.productsStore.filters();
+    return (
+      currentFilters.category !== null ||
+      currentFilters.status !== null ||
+      currentFilters.minPrice !== null ||
+      currentFilters.maxPrice !== null
+    );
+  }
 }

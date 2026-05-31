@@ -30,10 +30,45 @@
   } @else if (productsStore.error()) {
     <p class="products-page__feedback products-page__feedback--error">{{ productsStore.error() }}</p>
   } @else {
-    <p>Total de produtos: {{ productsStore.filteredItems().length }}</p>
+    <p class="products-page__total">
+      <span class="products-page__total-label">Total de produtos</span>
+      <span class="products-page__total-separator">:</span>
+      <strong class="products-page__total-value">{{ productsStore.filteredItems().length }}</strong>
+    </p>
 
     @if (productsStore.filteredItems().length === 0) {
-      <p>Nenhum produto encontrado para os filtros aplicados.</p>
+      <section class="products-page__empty-state" role="status" aria-live="polite">
+        <div class="products-page__empty-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.7"
+            />
+            <path
+              d="m8 10 8 4M16 10l-8 4"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.7"
+            />
+          </svg>
+        </div>
+
+        <h2>Nenhum produto encontrado</h2>
+        <p>Revise os filtros aplicados ou cadastre um novo item para preencher seu catalogo.</p>
+
+        <div class="products-page__empty-actions">
+          @if (hasActiveFilters()) {
+            <button class="products-page__empty-reset" type="button" (click)="onResetFilters()">Limpar filtros</button>
+          }
+          <a class="products-page__empty-create" routerLink="/products/new">Cadastrar produto</a>
+        </div>
+      </section>
     } @else {
       <ul>
         @for (item of productsStore.filteredItems(); track item.id) {
