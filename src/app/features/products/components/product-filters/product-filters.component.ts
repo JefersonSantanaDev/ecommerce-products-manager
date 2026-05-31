@@ -41,17 +41,17 @@ export class ProductFiltersComponent {
   readonly appliedPriceRangeLabel = computed<string | null>(() => this.buildAppliedPriceRangeLabel(this.filters()));
   readonly quickPriceRanges: readonly QuickPriceRange[] = [
     {
-      label: 'Ate R$ 200',
+      label: 'Até R$ 200',
       minPrice: null,
       maxPrice: 200,
     },
     {
-      label: 'R$ 200 ate R$ 500',
+      label: 'R$ 200 até R$ 500',
       minPrice: 200,
       maxPrice: 500,
     },
     {
-      label: 'R$ 500 ate R$ 1.000',
+      label: 'R$ 500 até R$ 1.000',
       minPrice: 500,
       maxPrice: 1000,
     },
@@ -203,7 +203,7 @@ export class ProductFiltersComponent {
     }
 
     if (hasMinPrice && hasMaxPrice) {
-      return `Faixa ativa: ${formatCurrencyToBrl(minPrice)} ate ${formatCurrencyToBrl(maxPrice)}`;
+      return `Faixa ativa: ${formatCurrencyToBrl(minPrice)} até ${formatCurrencyToBrl(maxPrice)}`;
     }
 
     if (hasMinPrice) {
@@ -214,6 +214,6 @@ export class ProductFiltersComponent {
       return null;
     }
 
-    return `Faixa ativa: ate ${formatCurrencyToBrl(maxPrice)}`;
+    return `Faixa ativa: até ${formatCurrencyToBrl(maxPrice)}`;
   }
 }

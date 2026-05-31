@@ -1,4 +1,4 @@
-<section class="product-form-page">
+﻿<section class="product-form-page">
   <app-breadcrumb [items]="breadcrumbItems()" />
 
   <header class="product-form-page__header">
@@ -8,7 +8,7 @@
     </div>
 
     <a class="product-form-page__back-button" routerLink="/products">
-      <span aria-hidden="true">←</span>
+      <span aria-hidden="true">&larr;</span>
       Voltar para lista
     </a>
   </header>
@@ -30,7 +30,7 @@
         <input type="text" formControlName="name" />
         <small class="product-form__error">
           @if (controls.name.touched && controls.name.hasError('required')) {
-            Nome e obrigatorio.
+            Nome é obrigatório.
           } @else if (controls.name.touched && controls.name.hasError('minlength')) {
             Nome precisa ter pelo menos 3 caracteres.
           } @else {
@@ -44,9 +44,9 @@
         <input type="text" formControlName="imageUrl" placeholder="https://exemplo.com/produto.jpg ou /assets/products/item.jpg" />
         <small class="product-form__error">
           @if (controls.imageUrl.touched && controls.imageUrl.hasError('required')) {
-            URL da imagem e obrigatoria.
+            URL da imagem é obrigatória.
           } @else if (controls.imageUrl.touched && controls.imageUrl.hasError('pattern')) {
-            Informe uma URL valida (http/https) ou caminho local iniciando com /assets/.
+            Informe uma URL válida (http/https) ou caminho local iniciando com /assets/.
           } @else {
             &nbsp;
           }
@@ -58,7 +58,7 @@
         <input type="text" formControlName="category" />
         <small class="product-form__error">
           @if (controls.category.touched && controls.category.hasError('required')) {
-            Categoria e obrigatoria.
+            Categoria é obrigatória.
           } @else {
             &nbsp;
           }
@@ -66,7 +66,7 @@
       </label>
 
       <label class="product-form__col product-form__col--price">
-        Preco
+        Preço
         <input
           type="text"
           inputmode="decimal"
@@ -78,9 +78,9 @@
         />
         <small class="product-form__error">
           @if (controls.price.touched && controls.price.hasError('required')) {
-            Preco e obrigatorio.
+            Preço é obrigatório.
           } @else if (controls.price.touched && controls.price.hasError('min')) {
-            Preco deve ser maior que zero.
+            Preço deve ser maior que zero.
           } @else {
             &nbsp;
           }
@@ -103,9 +103,9 @@
         <input type="number" min="0" step="1" formControlName="stock" />
         <small class="product-form__error">
           @if (controls.stock.touched && controls.stock.hasError('required')) {
-            Estoque e obrigatorio.
+            Estoque é obrigatório.
           } @else if (controls.stock.touched && controls.stock.hasError('min')) {
-            Estoque nao pode ser negativo.
+            Estoque não pode ser negativo.
           } @else {
             &nbsp;
           }
@@ -113,11 +113,11 @@
       </label>
 
       <label class="product-form__full-width">
-        Descricao
+        Descrição
         <textarea rows="4" formControlName="description"></textarea>
         <small class="product-form__error">
           @if (controls.description.touched && controls.description.hasError('required')) {
-            Descricao e obrigatoria.
+            Descrição é obrigatória.
           } @else {
             &nbsp;
           }

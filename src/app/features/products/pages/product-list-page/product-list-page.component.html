@@ -2,7 +2,7 @@
   <header class="products-page__header">
     <div class="products-page__header-copy">
       <h1>Produtos</h1>
-      <p>Gerencie seu mix de eletronicos com rapidez e organize seu estoque em tempo real.</p>
+      <p>Gerencie seu mix de eletrônicos com rapidez e organize seu estoque em tempo real.</p>
     </div>
 
     <a class="products-page__new-product-button" routerLink="/products/new">
@@ -54,7 +54,7 @@
         </div>
 
         <h2>Nenhum produto encontrado</h2>
-        <p>Revise os filtros aplicados ou cadastre um novo item para preencher seu catalogo.</p>
+        <p>Revise os filtros aplicados ou cadastre um novo item para preencher seu catálogo.</p>
 
         <div class="products-page__empty-actions">
           @if (hasActiveFilters()) {
@@ -98,7 +98,7 @@
                   <strong class="products-page__spec-value">{{ item.category }}</strong>
                 </p>
                 <p class="products-page__spec">
-                  <span class="products-page__spec-label">Preco</span>
+                  <span class="products-page__spec-label">Preço</span>
                   <strong class="products-page__spec-value">{{ formatPrice(item.price) }}</strong>
                 </p>
                 <p class="products-page__spec">

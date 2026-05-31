@@ -62,7 +62,7 @@ test.describe('Produtos - fluxos principais', () => {
     await expect(cards.nth(1)).toContainText('Monitores');
   });
 
-  test('deve validar campos obrigatorios no cadastro', async ({ page }) => {
+  test('deve validar campos obrigatórios no cadastro', async ({ page }) => {
     await page.getByRole('link', { name: 'Novo produto' }).click();
     await expect(
       page.getByRole('heading', {
@@ -72,10 +72,10 @@ test.describe('Produtos - fluxos principais', () => {
 
     await page.getByRole('button', { name: 'Salvar' }).click();
 
-    await expect(page.getByText('Nome e obrigatorio.')).toBeVisible();
-    await expect(page.getByText('URL da imagem e obrigatoria.')).toBeVisible();
-    await expect(page.getByText('Categoria e obrigatoria.')).toBeVisible();
-    await expect(page.getByText('Descricao e obrigatoria.')).toBeVisible();
+    await expect(page.getByText('Nome é obrigatório.')).toBeVisible();
+    await expect(page.getByText('URL da imagem é obrigatória.')).toBeVisible();
+    await expect(page.getByText('Categoria é obrigatória.')).toBeVisible();
+    await expect(page.getByText('Descrição é obrigatória.')).toBeVisible();
   });
 
   test('deve criar produto pela interface e refletir na listagem', async ({ page }) => {
@@ -89,10 +89,10 @@ test.describe('Produtos - fluxos principais', () => {
     await page.getByLabel('Nome').fill(productName);
     await page.getByLabel('URL da imagem').fill('/assets/products/keyboard.jpg');
     await page.getByLabel('Categoria').fill('Perifericos');
-    await page.getByLabel('Preco').fill('1299,90');
-    await page.getByLabel('Preco').blur();
+    await page.getByLabel('Preço').fill('1299,90');
+    await page.getByLabel('Preço').blur();
     await page.getByLabel('Estoque').fill('14');
-    await page.getByLabel('Descricao').fill('Produto criado via fluxo E2E para validar cadastro.');
+    await page.getByLabel('Descrição').fill('Produto criado via fluxo E2E para validar cadastro.');
 
     await page.getByRole('button', { name: 'Salvar' }).click();
     await expect(page.getByRole('heading', { name: 'Produtos' })).toBeVisible();
@@ -113,10 +113,10 @@ test.describe('Produtos - fluxos principais', () => {
 
     const updatedName = `Produto E2E Editado ${uniqueSuffix}`;
     await page.getByLabel('Nome').fill(updatedName);
-    await page.getByLabel('Preco').fill('1599,90');
-    await page.getByLabel('Preco').blur();
+    await page.getByLabel('Preço').fill('1599,90');
+    await page.getByLabel('Preço').blur();
     await page.getByLabel('Estoque').fill('9');
-    await page.getByLabel('Descricao').fill('Produto atualizado via fluxo E2E.');
+    await page.getByLabel('Descrição').fill('Produto atualizado via fluxo E2E.');
 
     await page.getByRole('button', { name: 'Status do produto' }).click();
     await page.getByRole('option', { name: 'Inativo' }).click();
@@ -172,7 +172,7 @@ async function createProductByApi(request: APIRequestContext, product: E2eProduc
   const body: unknown = await response.json();
   const id = extractProductId(body);
   if (id === null) {
-    throw new Error('Nao foi possivel identificar o id do produto criado via API de E2E.');
+    throw new Error('Não foi possível identificar o id do produto criado via API de E2E.');
   }
   return id;
 }

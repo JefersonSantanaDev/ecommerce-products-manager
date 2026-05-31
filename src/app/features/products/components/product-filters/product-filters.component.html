@@ -3,7 +3,7 @@
     <img src="/assets/brand/logo-1.png" alt="ClapsTech" />
     <div class="product-filters__brand-copy">
       <strong>Filtros de busca de produtos</strong>
-      <p>Refine por categoria, status e faixa de preco para encontrar resultados com mais rapidez.</p>
+      <p>Refine por categoria, status e faixa de preço para encontrar resultados com mais rapidez.</p>
     </div>
   </div>
 
@@ -13,7 +13,7 @@
     </div>
   }
 
-  <div class="product-filters__quick-ranges" aria-label="Faixas rapidas de preco">
+  <div class="product-filters__quick-ranges" aria-label="Faixas rápidas de preço">
     @for (range of quickPriceRanges; track range.label) {
       <button
         type="button"
@@ -51,7 +51,7 @@
   </div>
 
   <label class="product-filters__field product-filters__field--min-price">
-    <span class="product-filters__label">Preco minimo</span>
+    <span class="product-filters__label">Preço mínimo</span>
     <input
       class="product-filters__control"
       [class.product-filters__control--error]="hasPriceRangeError()"
@@ -67,7 +67,7 @@
   </label>
 
   <label class="product-filters__field product-filters__field--max-price">
-    <span class="product-filters__label">Preco maximo</span>
+    <span class="product-filters__label">Preço máximo</span>
     <input
       class="product-filters__control"
       [class.product-filters__control--error]="hasPriceRangeError()"
@@ -83,7 +83,7 @@
   </label>
 
   @if (hasPriceRangeError()) {
-    <p class="product-filters__error-message">Preco minimo nao pode ser maior que preco maximo.</p>
+    <p class="product-filters__error-message">Preço mínimo não pode ser maior que preço máximo.</p>
   }
 
   <button class="product-filters__button product-filters__button--reset" type="button" (click)="onReset()">

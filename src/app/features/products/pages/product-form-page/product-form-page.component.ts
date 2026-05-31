@@ -66,16 +66,16 @@ export class ProductFormPageComponent implements OnInit {
   );
   readonly pageDescription = computed(() =>
     this.isEditMode()
-      ? 'Atualize os dados principais para manter o catalogo de produtos sempre consistente.'
-      : 'Cadastre um novo produto com informacoes claras para facilitar a gestao da loja.',
+      ? 'Atualize os dados principais para manter o catálogo de produtos sempre consistente.'
+      : 'Cadastre um novo produto com informações claras para facilitar a gestão da loja.',
   );
   readonly formIntroTitle = computed(() =>
-    this.isEditMode() ? 'Atualizacao de cadastro' : 'Cadastro de novo produto',
+    this.isEditMode() ? 'Atualização de cadastro' : 'Cadastro de novo produto',
   );
   readonly formIntroDescription = computed(() =>
     this.isEditMode()
-      ? 'Revise os campos abaixo para manter o catalogo sempre atualizado e consistente.'
-      : 'Preencha os dados principais para publicar um novo item no catalogo com seguranca.',
+      ? 'Revise os campos abaixo para manter o catálogo sempre atualizado e consistente.'
+      : 'Preencha os dados principais para publicar um novo item no catálogo com segurança.',
   );
   readonly breadcrumbItems = computed<readonly BreadcrumbItem[]>(() => {
     const currentStepLabel = this.isEditMode() ? 'Editar produto' : 'Novo produto';
@@ -137,7 +137,7 @@ export class ProductFormPageComponent implements OnInit {
         };
         const updated = await this.productsStore.updateById(this.productId, payload);
         if (!updated) {
-          this.submitError.set('Nao foi possivel salvar o produto.');
+          this.submitError.set('Não foi possível salvar o produto.');
           return;
         }
       } else {
@@ -147,14 +147,14 @@ export class ProductFormPageComponent implements OnInit {
         };
         const created = await this.productsStore.create(payload);
         if (!created) {
-          this.submitError.set('Nao foi possivel salvar o produto.');
+          this.submitError.set('Não foi possível salvar o produto.');
           return;
         }
       }
 
       await this.router.navigateByUrl('/products');
     } catch {
-      this.submitError.set('Nao foi possivel salvar o produto.');
+      this.submitError.set('Não foi possível salvar o produto.');
     } finally {
       this.isSubmitting.set(false);
     }
@@ -208,7 +208,7 @@ export class ProductFormPageComponent implements OnInit {
       });
       this.syncPriceDisplayFromControl();
     } catch {
-      this.submitError.set('Nao foi possivel carregar os dados do produto.');
+      this.submitError.set('Não foi possível carregar os dados do produto.');
     } finally {
       this.isLoadingProduct.set(false);
     }

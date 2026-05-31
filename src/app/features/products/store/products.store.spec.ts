@@ -127,7 +127,7 @@ describe('ProductsStore', () => {
     expect(apiMock.remove).toHaveBeenCalledWith('p1');
     expect(store.items()).toHaveLength(1);
     expect(store.items()[0].id).toBe('p2');
-    expect(store.notice()).toBe('Produto excluido com sucesso.');
+    expect(store.notice()).toBe('Produto excluído com sucesso.');
   });
 
   it('define erro quando create falha', async () => {
@@ -146,6 +146,6 @@ describe('ProductsStore', () => {
     const created = await store.create(payload);
 
     expect(created).toBe(false);
-    expect(store.error()).toBe('Nao foi possivel cadastrar o produto.');
+    expect(store.error()).toBe('Não foi possível cadastrar o produto.');
   });
 });

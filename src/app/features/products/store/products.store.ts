@@ -50,7 +50,7 @@ export const ProductsStore = signalStore(
       } catch {
         patchState(store, {
           loading: false,
-          error: 'Nao foi possivel carregar os produtos.',
+          error: 'Não foi possível carregar os produtos.',
         });
       }
     },
@@ -79,7 +79,7 @@ export const ProductsStore = signalStore(
       } catch {
         patchState(store, {
           loading: false,
-          error: 'Nao foi possivel cadastrar o produto.',
+          error: 'Não foi possível cadastrar o produto.',
         });
         return false;
       }
@@ -98,7 +98,7 @@ export const ProductsStore = signalStore(
       } catch {
         patchState(store, {
           loading: false,
-          error: 'Nao foi possivel atualizar o produto.',
+          error: 'Não foi possível atualizar o produto.',
         });
         return false;
       }
@@ -110,13 +110,13 @@ export const ProductsStore = signalStore(
         await firstValueFrom(api.remove(id));
         patchState(store, (state) => ({
           deletingId: null,
-          notice: 'Produto excluido com sucesso.',
+          notice: 'Produto excluído com sucesso.',
           items: state.items.filter((item) => item.id !== id),
         }));
       } catch {
         patchState(store, {
           deletingId: null,
-          error: 'Nao foi possivel excluir o produto.',
+          error: 'Não foi possível excluir o produto.',
         });
       }
     },
