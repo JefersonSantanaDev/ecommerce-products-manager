@@ -1,0 +1,77 @@
+:host {
+  display: contents;
+}
+
+.confirm-dialog__backdrop {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.44);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1rem;
+  position: fixed;
+  z-index: 40;
+}
+
+.confirm-dialog {
+  background-color: var(--color-surface);
+  border: 1px solid color-mix(in srgb, var(--color-brand) 18%, var(--color-border));
+  border-radius: var(--radius-card);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.26);
+  max-width: 28rem;
+  padding: 1.05rem;
+  width: 100%;
+}
+
+.confirm-dialog h2 {
+  color: var(--color-brand-dark);
+  font-size: 1.22rem;
+  margin: 0 0 0.4rem;
+}
+
+.confirm-dialog p {
+  color: var(--color-text-soft);
+  margin: 0;
+}
+
+.confirm-dialog p strong {
+  color: var(--color-text);
+}
+
+.confirm-dialog__actions {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  margin-top: 1.1rem;
+}
+
+.confirm-dialog__button {
+  min-height: 2.45rem;
+  min-width: 8.3rem;
+}
+
+.confirm-dialog__button--ghost {
+  background-color: #fff;
+}
+
+.confirm-dialog__button--danger {
+  background-color: var(--color-danger);
+  border-color: var(--color-danger);
+  color: #fff;
+}
+
+.confirm-dialog__button--danger:hover {
+  background-color: color-mix(in srgb, var(--color-danger) 88%, #fff);
+  border-color: color-mix(in srgb, var(--color-danger) 88%, #fff);
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .confirm-dialog__actions {
+    flex-direction: column-reverse;
+  }
+
+  .confirm-dialog__button {
+    width: 100%;
+  }
+}

@@ -92,10 +92,10 @@
                 <button
                   class="products-page__icon-action products-page__icon-action--delete"
                   type="button"
-                  [disabled]="productsStore.deletingId() === item.id"
+                  [disabled]="productsStore.deletingId() !== null"
                   aria-label="Excluir produto"
                   data-tooltip="Excluir"
-                  (click)="onDelete(item.id)"
+                  (click)="onDeleteRequest(item.id, item.name)"
                 >
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path
@@ -116,3 +116,16 @@
     }
   }
 </section>
+
+<app-confirm-dialog
+  [isOpen]="deleteTargetId() !== null"
+  title="Excluir produto"
+  description="Deseja realmente excluir"
+  [highlightText]="deleteTargetName()"
+  confirmLabel="Excluir produto"
+  cancelLabel="Cancelar"
+  confirmVariant="danger"
+  [isBusy]="productsStore.deletingId() === deleteTargetId()"
+  (canceled)="onDeleteCancel()"
+  (confirmed)="onDeleteConfirm()"
+/>

@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { ProductFilters } from '../../../../core/models';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ProductFiltersComponent } from '../../components';
 import { ProductsStore } from '../../store';
 
 @Component({
   selector: 'app-product-list-page',
-  imports: [RouterLink, ProductFiltersComponent],
+  imports: [RouterLink, ProductFiltersComponent, ConfirmDialogComponent],
   templateUrl: './product-list-page.component.html',
   styleUrl: './product-list-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +16,8 @@ import { ProductsStore } from '../../store';
 export class ProductListPageComponent implements OnInit {
   readonly productsStore = inject(ProductsStore);
   readonly fallbackImageSrc = '/assets/products/monitor.jpg';
+  readonly deleteTargetId = signal<string | null>(null);
+  readonly deleteTargetName = signal<string | null>(null);
 
   ngOnInit(): void {
     this.productsStore.loadAll();
@@ -28,13 +31,24 @@ export class ProductListPageComponent implements OnInit {
     this.productsStore.resetFilters();
   }
 
-  async onDelete(id: string): Promise<void> {
-    const confirmed = window.confirm('Deseja realmente excluir este produto?');
-    if (!confirmed) {
+  onDeleteRequest(id: string, name: string): void {
+    this.deleteTargetId.set(id);
+    this.deleteTargetName.set(name);
+  }
+
+  onDeleteCancel(): void {
+    this.deleteTargetId.set(null);
+    this.deleteTargetName.set(null);
+  }
+
+  async onDeleteConfirm(): Promise<void> {
+    const id = this.deleteTargetId();
+    if (!id) {
       return;
     }
 
     await this.productsStore.removeById(id);
+    this.onDeleteCancel();
   }
 
   onClearNotice(): void {
