@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@ang
 import { RouterLink } from '@angular/router';
 
 import { ProductFilters } from '../../../../core/models';
+import { formatCurrencyToBrl } from '../../../../core/utils/currency.util';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ProductFiltersComponent } from '../../components';
 import { ProductsStore } from '../../store';
@@ -67,5 +68,13 @@ export class ProductListPageComponent implements OnInit {
 
     target.dataset['fallbackApplied'] = 'true';
     target.src = this.fallbackImageSrc;
+  }
+
+  formatPrice(value: number | null | undefined): string {
+    if (typeof value !== 'number' || !Number.isFinite(value)) {
+      return '-';
+    }
+
+    return formatCurrencyToBrl(value);
   }
 }

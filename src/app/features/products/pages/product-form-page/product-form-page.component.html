@@ -1,14 +1,31 @@
 <section class="product-form-page">
+  <app-breadcrumb [items]="breadcrumbItems()" />
+
   <header class="product-form-page__header">
-    <h1>{{ pageTitle() }}</h1>
-    <a routerLink="/products">Voltar para lista</a>
+    <div class="product-form-page__header-copy">
+      <h1>{{ pageTitle() }}</h1>
+      <p>{{ pageDescription() }}</p>
+    </div>
+
+    <a class="product-form-page__back-button" routerLink="/products">
+      <span aria-hidden="true">←</span>
+      Voltar para lista
+    </a>
   </header>
 
   @if (isLoadingProduct()) {
     <p>Carregando produto...</p>
   } @else {
     <form class="product-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <label>
+      <div class="product-form__intro">
+        <img src="/assets/brand/logo-1.png" alt="ClapsTech" />
+        <div class="product-form__intro-copy">
+          <strong>{{ formIntroTitle() }}</strong>
+          <p>{{ formIntroDescription() }}</p>
+        </div>
+      </div>
+
+      <label class="product-form__col product-form__col--name">
         Nome
         <input type="text" formControlName="name" />
         @if (controls.name.touched && controls.name.hasError('required')) {
@@ -19,7 +36,7 @@
         }
       </label>
 
-      <label>
+      <label class="product-form__col product-form__col--image-url">
         URL da imagem
         <input type="url" formControlName="imageUrl" placeholder="https://exemplo.com/produto.jpg" />
         @if (controls.imageUrl.touched && controls.imageUrl.hasError('required')) {
@@ -30,7 +47,7 @@
         }
       </label>
 
-      <label>
+      <label class="product-form__col product-form__col--category">
         Categoria
         <input type="text" formControlName="category" />
         @if (controls.category.touched && controls.category.hasError('required')) {
@@ -38,7 +55,7 @@
         }
       </label>
 
-      <label>
+      <label class="product-form__col product-form__col--price">
         Preco
         <input type="number" min="0" step="0.01" formControlName="price" />
         @if (controls.price.touched && controls.price.hasError('required')) {
@@ -49,7 +66,7 @@
         }
       </label>
 
-      <div class="product-form__field">
+      <div class="product-form__field product-form__col product-form__col--status">
         <span class="product-form__field-label">Status</span>
         <app-custom-select
           label="Status do produto"
@@ -60,7 +77,7 @@
         />
       </div>
 
-      <label>
+      <label class="product-form__col product-form__col--stock">
         Estoque
         <input type="number" min="0" step="1" formControlName="stock" />
         @if (controls.stock.touched && controls.stock.hasError('required')) {

@@ -1,7 +1,14 @@
 <section class="products-page">
   <header class="products-page__header">
-    <h1>Produtos</h1>
-    <a routerLink="/products/new">Novo produto</a>
+    <div class="products-page__header-copy">
+      <h1>Produtos</h1>
+      <p>Gerencie seu mix de eletronicos com rapidez e organize seu estoque em tempo real.</p>
+    </div>
+
+    <a class="products-page__new-product-button" routerLink="/products/new">
+      <span aria-hidden="true">+</span>
+      Novo produto
+    </a>
   </header>
 
   <app-product-filters
@@ -63,7 +70,7 @@
                 </p>
                 <p class="products-page__spec">
                   <span class="products-page__spec-label">Preco</span>
-                  <strong class="products-page__spec-value">R$ {{ item.price }}</strong>
+                  <strong class="products-page__spec-value">{{ formatPrice(item.price) }}</strong>
                 </p>
                 <p class="products-page__spec">
                   <span class="products-page__spec-label">Estoque</span>

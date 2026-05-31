@@ -7,7 +7,26 @@
     </div>
   </div>
 
-  <div class="product-filters__field">
+  @if (appliedPriceRangeLabel(); as priceRangeLabel) {
+    <div class="product-filters__price-summary" role="status" aria-live="polite">
+      <span>{{ priceRangeLabel }}</span>
+    </div>
+  }
+
+  <div class="product-filters__quick-ranges" aria-label="Faixas rapidas de preco">
+    @for (range of quickPriceRanges; track range.label) {
+      <button
+        type="button"
+        class="product-filters__quick-range-chip"
+        [class.product-filters__quick-range-chip--active]="activeQuickRangeLabel() === range.label"
+        (click)="onApplyQuickPriceRange(range)"
+      >
+        {{ range.label }}
+      </button>
+    }
+  </div>
+
+  <div class="product-filters__field product-filters__field--category">
     <span class="product-filters__label">Categoria</span>
     <app-custom-select
       label="Categoria"
@@ -19,7 +38,7 @@
     />
   </div>
 
-  <div class="product-filters__field">
+  <div class="product-filters__field product-filters__field--status">
     <span class="product-filters__label">Status</span>
     <app-custom-select
       label="Status"
@@ -31,29 +50,43 @@
     />
   </div>
 
-  <label class="product-filters__field">
+  <label class="product-filters__field product-filters__field--min-price">
     <span class="product-filters__label">Preco minimo</span>
     <input
       class="product-filters__control"
-      type="number"
-      [value]="filters().minPrice ?? ''"
-      min="0"
-      step="0.01"
-      (input)="onMinPriceChange($event)"
+      [class.product-filters__control--error]="hasPriceRangeError()"
+      [attr.aria-invalid]="hasPriceRangeError()"
+      type="text"
+      inputmode="decimal"
+      placeholder="0,00"
+      [value]="minPriceDisplay()"
+      (focus)="onMinPriceFocus()"
+      (input)="onMinPriceInput($event)"
+      (blur)="onMinPriceBlur()"
     />
   </label>
 
-  <label class="product-filters__field">
+  <label class="product-filters__field product-filters__field--max-price">
     <span class="product-filters__label">Preco maximo</span>
     <input
       class="product-filters__control"
-      type="number"
-      [value]="filters().maxPrice ?? ''"
-      min="0"
-      step="0.01"
-      (input)="onMaxPriceChange($event)"
+      [class.product-filters__control--error]="hasPriceRangeError()"
+      [attr.aria-invalid]="hasPriceRangeError()"
+      type="text"
+      inputmode="decimal"
+      placeholder="0,00"
+      [value]="maxPriceDisplay()"
+      (focus)="onMaxPriceFocus()"
+      (input)="onMaxPriceInput($event)"
+      (blur)="onMaxPriceBlur()"
     />
   </label>
 
-  <button class="product-filters__button" type="button" (click)="onReset()">Limpar filtros</button>
+  @if (hasPriceRangeError()) {
+    <p class="product-filters__error-message">Preco minimo nao pode ser maior que preco maximo.</p>
+  }
+
+  <button class="product-filters__button product-filters__button--reset" type="button" (click)="onReset()">
+    Limpar filtros
+  </button>
 </section>

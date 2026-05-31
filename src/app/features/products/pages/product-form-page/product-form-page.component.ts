@@ -9,6 +9,7 @@ import {
   UpdateProductPayload,
 } from '../../../../core/models';
 import { ProductApiService } from '../../../../core/services';
+import { BreadcrumbComponent, BreadcrumbItem } from '../../../../shared/components/breadcrumb/breadcrumb.component';
 import {
   CustomSelectComponent,
   SelectOption,
@@ -17,7 +18,7 @@ import { ProductsStore } from '../../store';
 
 @Component({
   selector: 'app-product-form-page',
-  imports: [ReactiveFormsModule, RouterLink, CustomSelectComponent],
+  imports: [ReactiveFormsModule, RouterLink, CustomSelectComponent, BreadcrumbComponent],
   templateUrl: './product-form-page.component.html',
   styleUrl: './product-form-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,6 +61,32 @@ export class ProductFormPageComponent implements OnInit {
   readonly pageTitle = computed(() =>
     this.isEditMode() ? 'Editar produto' : 'Cadastrar produto',
   );
+  readonly pageDescription = computed(() =>
+    this.isEditMode()
+      ? 'Atualize os dados principais para manter o catalogo de produtos sempre consistente.'
+      : 'Cadastre um novo produto com informacoes claras para facilitar a gestao da loja.',
+  );
+  readonly formIntroTitle = computed(() =>
+    this.isEditMode() ? 'Atualizacao de cadastro' : 'Cadastro de novo produto',
+  );
+  readonly formIntroDescription = computed(() =>
+    this.isEditMode()
+      ? 'Revise os campos abaixo para manter o catalogo sempre atualizado e consistente.'
+      : 'Preencha os dados principais para publicar um novo item no catalogo com seguranca.',
+  );
+  readonly breadcrumbItems = computed<readonly BreadcrumbItem[]>(() => {
+    const currentStepLabel = this.isEditMode() ? 'Editar produto' : 'Novo produto';
+    return [
+      {
+        label: 'Produtos',
+        url: '/products',
+      },
+      {
+        label: currentStepLabel,
+        isCurrent: true,
+      },
+    ];
+  });
 
   get controls(): typeof this.form.controls {
     return this.form.controls;

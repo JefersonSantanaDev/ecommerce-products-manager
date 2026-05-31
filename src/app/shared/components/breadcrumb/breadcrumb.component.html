@@ -1,0 +1,15 @@
+@if (resolvedItems().length > 0) {
+  <nav class="breadcrumb" aria-label="Navegacao estrutural">
+    <ol class="breadcrumb__list">
+      @for (item of resolvedItems(); track item.id) {
+        <li class="breadcrumb__item">
+          @if (!item.isCurrent && item.url !== null) {
+            <a class="breadcrumb__link" [routerLink]="item.url">{{ item.label }}</a>
+          } @else {
+            <span class="breadcrumb__current" [attr.aria-current]="item.isCurrent ? 'page' : null">{{ item.label }}</span>
+          }
+        </li>
+      }
+    </ol>
+  </nav>
+}

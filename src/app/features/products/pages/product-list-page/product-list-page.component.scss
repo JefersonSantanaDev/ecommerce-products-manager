@@ -1,13 +1,69 @@
 .products-page {
-  margin: 0 auto;
-  max-width: 72rem;
+  margin: 0;
   padding: 1.5rem;
 }
 
 .products-page__header {
   align-items: center;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
+  margin-bottom: 0.9rem;
+  padding: 0.1rem 0 0.2rem;
+}
+
+.products-page__header-copy {
+  display: grid;
+  gap: 0.18rem;
+}
+
+.products-page__header h1 {
+  font-size: clamp(1.75rem, 2vw, 2.2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.products-page__header p {
+  color: var(--color-text-soft);
+  font-size: 0.92rem;
+  margin: 0;
+  max-width: 38rem;
+}
+
+.products-page__new-product-button {
+  align-items: center;
+  background-color: var(--color-accent);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 70%, #0f5132);
+  border-radius: 999px;
+  box-shadow: none;
+  color: #fff;
+  display: inline-flex;
+  font-size: 0.92rem;
+  font-weight: 700;
+  gap: 0.4rem;
+  min-height: 2.6rem;
+  padding: 0.55rem 1rem;
+  text-decoration: none;
+  transition: transform var(--transition-standard), box-shadow var(--transition-standard), background-color var(--transition-standard);
+}
+
+.products-page__new-product-button span {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.products-page__new-product-button:hover {
+  background-color: color-mix(in srgb, var(--color-accent) 85%, #0f5132);
+  transform: translateY(-1px);
+}
+
+.products-page__new-product-button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-brand) 42%, #fff);
+  outline-offset: 2px;
 }
 
 .products-page__feedback {
@@ -209,6 +265,12 @@ button.products-page__icon-action {
     align-items: flex-start;
     flex-direction: column;
     gap: 0.5rem;
+    padding: 0.95rem;
+  }
+
+  .products-page__new-product-button {
+    justify-content: center;
+    width: 100%;
   }
 
   .products-page__feedback {
