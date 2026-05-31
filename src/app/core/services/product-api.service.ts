@@ -13,7 +13,7 @@ import {
 })
 export class ProductApiService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:3000/products';
+  private readonly baseUrl = '/api/products';
 
   list(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl);

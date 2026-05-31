@@ -4,5 +4,5 @@ module.exports = {
   ...createCjsPreset(),
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   clearMocks: true,
-  testPathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/.angular/'],
+  testPathIgnorePatterns: ['<rootDir>/dist/', '<rootDir>/.angular/', '<rootDir>/e2e/'],
 };

@@ -10,7 +10,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "ecommerce-products-manager": {
+    "clapstech": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -68,10 +68,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ecommerce-products-manager:build:production"
+              "buildTarget": "clapstech:build:production"
             },
             "development": {
-              "buildTarget": "ecommerce-products-manager:build:development"
+              "buildTarget": "clapstech:build:development"
             }
           },
           "defaultConfiguration": "development"
