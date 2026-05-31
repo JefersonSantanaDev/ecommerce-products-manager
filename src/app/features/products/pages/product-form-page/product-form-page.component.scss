@@ -108,9 +108,11 @@
 label,
 .product-form__field {
   color: var(--color-text-soft);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0.4rem;
   font-weight: 600;
+  justify-content: flex-start;
 }
 
 .product-form__col {
@@ -127,8 +129,12 @@ textarea {
   border-color: color-mix(in srgb, var(--color-brand) 10%, var(--color-border));
 }
 
-small {
+.product-form__error {
   color: var(--color-danger);
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1.15;
+  min-height: 0.92rem;
 }
 
 .product-form__full-width {

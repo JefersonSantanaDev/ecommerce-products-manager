@@ -9,6 +9,7 @@ import {
   UpdateProductPayload,
 } from '../../../../core/models';
 import { ProductApiService } from '../../../../core/services';
+import { formatNumberToBrl, parsePriceInput, sanitizePriceInput } from '../../../../core/utils/currency.util';
 import { BreadcrumbComponent, BreadcrumbItem } from '../../../../shared/components/breadcrumb/breadcrumb.component';
 import {
   CustomSelectComponent,
@@ -36,6 +37,8 @@ export class ProductFormPageComponent implements OnInit {
   readonly isLoadingProduct = signal(false);
   readonly isSubmitting = signal(false);
   readonly submitError = signal<string | null>(null);
+  readonly priceDisplay = signal<string>('');
+  readonly priceFocused = signal(false);
   private productId: string | null = null;
   readonly statusOptions: readonly SelectOption[] = [
     { label: 'Ativo', value: 'active' },
@@ -106,6 +109,7 @@ export class ProductFormPageComponent implements OnInit {
   ngOnInit(): void {
     this.productId = this.route.snapshot.paramMap.get('id');
     this.isEditMode.set(this.productId !== null);
+    this.syncPriceDisplayFromControl();
 
     if (!this.productId) {
       return;
@@ -160,6 +164,33 @@ export class ProductFormPageComponent implements OnInit {
     await this.router.navigateByUrl('/products');
   }
 
+  onPriceFocus(): void {
+    this.priceFocused.set(true);
+  }
+
+  onPriceInput(event: Event): void {
+    const targetInput = this.getInputTarget(event);
+    if (targetInput === null) {
+      return;
+    }
+
+    const sanitizedValue = sanitizePriceInput(targetInput.value);
+    this.priceDisplay.set(sanitizedValue);
+
+    const parsedValue = parsePriceInput(sanitizedValue);
+    this.controls.price.setValue(parsedValue ?? 0);
+    this.controls.price.markAsDirty();
+  }
+
+  onPriceBlur(): void {
+    this.priceFocused.set(false);
+    const parsedValue = parsePriceInput(this.priceDisplay());
+
+    this.controls.price.setValue(parsedValue ?? 0);
+    this.controls.price.markAsTouched();
+    this.priceDisplay.set(parsedValue === null ? '' : formatNumberToBrl(parsedValue));
+  }
+
   private async loadProduct(id: string): Promise<void> {
     this.isLoadingProduct.set(true);
     this.submitError.set(null);
@@ -175,6 +206,7 @@ export class ProductFormPageComponent implements OnInit {
         description: product.description,
         stock: product.stock,
       });
+      this.syncPriceDisplayFromControl();
     } catch {
       this.submitError.set('Nao foi possivel carregar os dados do produto.');
     } finally {
@@ -188,5 +220,24 @@ export class ProductFormPageComponent implements OnInit {
     }
 
     return null;
+  }
+
+  private getInputTarget(event: Event): HTMLInputElement | null {
+    const target = event.target;
+    return target instanceof HTMLInputElement ? target : null;
+  }
+
+  private syncPriceDisplayFromControl(): void {
+    if (this.priceFocused()) {
+      return;
+    }
+
+    const currentPrice = this.controls.price.value;
+    if (currentPrice <= 0) {
+      this.priceDisplay.set('');
+      return;
+    }
+
+    this.priceDisplay.set(formatNumberToBrl(currentPrice));
   }
 }
