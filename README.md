@@ -100,19 +100,25 @@ src/app/
 npm install
 ```
 
-2. Subir API mock:
+2. Instalar os navegadores do Playwright (necessario para E2E):
+
+```bash
+npx playwright install
+```
+
+3. Subir API mock:
 
 ```bash
 npm run api:mock
 ```
 
-3. Em outro terminal, subir frontend:
+4. Em outro terminal, subir frontend:
 
 ```bash
 npm run start
 ```
 
-4. Acessar:
+5. Acessar:
 
 ```text
 http://localhost:4200
@@ -202,6 +208,7 @@ Fluxos cobertos:
 Comando:
 
 ```bash
+npx playwright install
 npm run e2e
 ```
 
