@@ -8,6 +8,17 @@
   </div>
 </header>
 
-<main class="app-shell">
+<div class="route-loader" [class.route-loader--visible]="isRouteLoading()" [attr.aria-hidden]="!isRouteLoading()">
+  <div class="route-loader__spinner" role="status" aria-live="polite" aria-label="Carregando pagina">
+    <img src="/assets/brand/logo-1.png" alt="" />
+    <div class="route-loader__progress" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+
+<main class="app-shell" [class.app-shell--loading]="isRouteLoading()">
   <router-outlet />
 </main>

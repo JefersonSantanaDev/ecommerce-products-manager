@@ -38,12 +38,12 @@
 
       <label class="product-form__col product-form__col--image-url">
         URL da imagem
-        <input type="url" formControlName="imageUrl" placeholder="https://exemplo.com/produto.jpg" />
+        <input type="text" formControlName="imageUrl" placeholder="https://exemplo.com/produto.jpg ou /assets/products/item.jpg" />
         @if (controls.imageUrl.touched && controls.imageUrl.hasError('required')) {
           <small>URL da imagem e obrigatoria.</small>
         }
         @if (controls.imageUrl.touched && controls.imageUrl.hasError('pattern')) {
-          <small>Informe uma URL valida com http:// ou https://.</small>
+          <small>Informe uma URL valida (http/https) ou caminho local iniciando com /assets/.</small>
         }
       </label>
 

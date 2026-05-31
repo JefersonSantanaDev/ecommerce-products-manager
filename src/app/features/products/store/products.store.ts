@@ -123,5 +123,8 @@ export const ProductsStore = signalStore(
     clearNotice(): void {
       patchState(store, { notice: null });
     },
+    clearError(): void {
+      patchState(store, { error: null });
+    },
   })),
 );

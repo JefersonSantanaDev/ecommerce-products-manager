@@ -18,17 +18,11 @@
     (resetFilters)="onResetFilters()"
   />
 
-  @if (productsStore.notice()) {
-    <div class="products-page__feedback products-page__feedback--success" role="status">
-      <span>{{ productsStore.notice() }}</span>
-      <button type="button" (click)="onClearNotice()">Fechar</button>
-    </div>
-  }
+  <app-feedback-toast [message]="productsStore.notice()" variant="success" (closed)="onClearNotice()" />
+  <app-feedback-toast [message]="productsStore.error()" variant="error" (closed)="onClearError()" />
 
   @if (productsStore.loading()) {
     <p>Carregando produtos...</p>
-  } @else if (productsStore.error()) {
-    <p class="products-page__feedback products-page__feedback--error">{{ productsStore.error() }}</p>
   } @else {
     <p class="products-page__total">
       <span class="products-page__total-label">Total de produtos</span>

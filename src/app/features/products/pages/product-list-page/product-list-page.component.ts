@@ -4,12 +4,13 @@ import { RouterLink } from '@angular/router';
 import { ProductFilters } from '../../../../core/models';
 import { formatCurrencyToBrl } from '../../../../core/utils/currency.util';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { FeedbackToastComponent } from '../../../../shared/components/feedback-toast/feedback-toast.component';
 import { ProductFiltersComponent } from '../../components';
 import { ProductsStore } from '../../store';
 
 @Component({
   selector: 'app-product-list-page',
-  imports: [RouterLink, ProductFiltersComponent, ConfirmDialogComponent],
+  imports: [RouterLink, ProductFiltersComponent, ConfirmDialogComponent, FeedbackToastComponent],
   templateUrl: './product-list-page.component.html',
   styleUrl: './product-list-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,6 +55,10 @@ export class ProductListPageComponent implements OnInit {
 
   onClearNotice(): void {
     this.productsStore.clearNotice();
+  }
+
+  onClearError(): void {
+    this.productsStore.clearError();
   }
 
   onProductImageError(event: Event): void {

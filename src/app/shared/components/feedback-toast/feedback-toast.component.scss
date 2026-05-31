@@ -1,0 +1,121 @@
+:host {
+  pointer-events: none;
+  position: fixed;
+  right: 1.1rem;
+  top: 5.25rem;
+  z-index: 60;
+}
+
+.feedback-toast {
+  --toast-accent: #ffffff;
+
+  align-items: center;
+  animation: toast-enter 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  background-color: var(--color-brand-dark);
+  border: 1px solid color-mix(in srgb, #ffffff 18%, var(--color-brand-dark));
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18), 0 2px 4px rgba(0, 0, 0, 0.12);
+  color: #ffffff;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  max-width: min(26rem, calc(100vw - 2rem));
+  min-width: min(18rem, calc(100vw - 2rem));
+  overflow: hidden;
+  padding: 0.68rem 0.78rem 0.9rem;
+  pointer-events: auto;
+  position: relative;
+}
+
+.feedback-toast::before {
+  background-color: color-mix(in srgb, var(--color-accent) 80%, #ffffff);
+  content: '';
+  inset: 0 0 auto;
+  height: 2px;
+  position: absolute;
+}
+
+.feedback-toast--error {
+  background-color: color-mix(in srgb, var(--color-danger) 38%, var(--color-brand-dark));
+  border-color: color-mix(in srgb, #ffffff 12%, var(--color-danger));
+}
+
+.feedback-toast--info {
+  background-color: color-mix(in srgb, var(--color-brand) 85%, #0c1f1a);
+}
+
+.feedback-toast__icon {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.95);
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 700;
+  height: 1.75rem;
+  justify-content: center;
+  width: 1.75rem;
+}
+
+.feedback-toast__icon svg {
+  height: 0.95rem;
+  width: 0.95rem;
+}
+
+.feedback-toast__content p {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.feedback-toast__progress {
+  animation: toast-progress var(--toast-duration, 4200ms) linear forwards;
+  background-color: rgba(255, 255, 255, 0.74);
+  border-radius: 999px;
+  display: block;
+  inset: auto 0 0 0;
+  height: 1px;
+  position: absolute;
+  transform-origin: left;
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-progress {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+@media (max-width: 720px) {
+  :host {
+    left: 0.75rem;
+    right: 0.75rem;
+    top: auto;
+    bottom: 0.9rem;
+  }
+
+  .feedback-toast {
+    min-width: 0;
+    width: 100%;
+  }
+}

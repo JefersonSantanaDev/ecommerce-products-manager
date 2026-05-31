@@ -24,7 +24,7 @@ import { ProductsStore } from '../../store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductFormPageComponent implements OnInit {
-  private static readonly imageUrlPattern = /^https?:\/\/.+/i;
+  private static readonly imageUrlPattern = /^(https?:\/\/.+|\/assets\/.+)$/i;
 
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly route = inject(ActivatedRoute);
